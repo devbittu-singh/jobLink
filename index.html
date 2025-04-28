@@ -1,273 +1,266 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LabourLink</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: #fff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .logo {
-      font-weight: 600;
-      font-size: 1.5rem;
-      color: #003366;
-    }
-    nav a {
-      margin-left: 1rem;
-      text-decoration: none;
-      color: #003366;
-      font-weight: 500;
-    }
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 4rem 2rem;
-      background-color: #e6f0ff;
-    }
-    .hero h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero button {
-      padding: 0.8rem 1.5rem;
-      margin: 0.5rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .btn-primary {
-      background-color: #004080;
-      color: white;
-    }
-    .btn-secondary {
-      background-color: #cce0ff;
-      color: #004080;
-    }
-    .section {
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-    .section h2 {
-      font-size: 1.75rem;
-      color: #003366;
-      margin-bottom: 1rem;
-    }
-    .steps, .featured-workers, .job-listings, .admin-panel {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .step, .worker, .job, .admin-box {
-      width: 200px;
-      background: #fff;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    .form-box {
-      max-width: 400px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    .form-box h2 {
-      color: #003366;
-      margin-bottom: 1rem;
-    }
-    .form-box input, .form-box select {
-      width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .form-box button {
-      width: 100%;
-      padding: 0.75rem;
-      background-color: #004080;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .dashboard, .profile, .job-posting, .apply-form, .admin-section {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #003366;
-      color: white;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Worker-Employer Connect</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 1em; }
+  .hidden { display: none; }
+  input, textarea, select { width: 100%; margin: 0.5em 0; padding: 0.5em; }
+  button { padding: 0.5em 1em; margin: 0.2em 0; }
+  .job, .user-item, .admin-job-item { border: 1px solid #ccc; padding: 1em; margin: 1em 0; }
+  .user-item button, .admin-job-item button { margin-left: 1em; }
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">LabourLink</div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#how">How It Works</a>
-      <a href="#login">Login</a>
-      <a href="#signup">Signup</a>
-      <a href="#dashboard">Dashboard</a>
-    </nav>
-  </header>  <section class="hero">
-    <h1>Connecting Workers with Employers</h1>
-    <p>Empower your workforce. Find skilled workers or discover job opportunities.</p>
-    <button class="btn-primary">Hire Workers</button>
-    <button class="btn-secondary">Find Work</button>
-  </section>  <section class="section" id="how">
-    <h2>How LabourLink Works</h2>
-    <div class="steps">
-      <div class="step">
-        <h3>Sign Up</h3>
-        <p>Create an account as a worker or employer.</p>
-      </div>
-      <div class="step">
-        <h3>Post or Search</h3>
-        <p>Employers post jobs, workers search listings.</p>
-      </div>
-      <div class="step">
-        <h3>Connect</h3>
-        <p>Match with the right opportunity or talent.</p>
-      </div>
-    </div>
-  </section>  <section class="section">
-    <h2>Featured Workers</h2>
-    <div class="featured-workers">
-      <div class="worker">
-        <strong>Rajesh</strong><br>
-        <span>Electrician</span>
-      </div>
-      <div class="worker">
-        <strong>Anita</strong><br>
-        <span>Cleaner</span>
-      </div>
-      <div class="worker">
-        <strong>Vikram</strong><br>
-        <span>Driver</span>
-      </div>
-    </div>
-  </section>  <section class="section">
-    <h2>Testimonials</h2>
-    <p><em>"LabourLink made hiring skilled workers so simple. Highly recommended!"</em><br>– Amit R.</p>
-  </section>  <section class="section" id="login">
-    <div class="form-box">
-      <h2>Login</h2>
-      <form action="#" method="post">
-        <input type="email" placeholder="Email" required>
-        <input type="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  </section>  <section class="section" id="signup">
-    <div class="form-box">
-      <h2>Signup</h2>
-      <form action="#" method="post">
-        <select required>
-          <option value="">Select Role</option>
-          <option value="worker">Worker</option>
-          <option value="employer">Employer</option>
-        </select>
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email" required>
-        <input type="password" placeholder="Password" required>
-        <button type="submit">Signup</button>
-      </form>
-    </div>
-  </section>  <section class="section" id="dashboard">
-    <div class="dashboard">
-      <h2>Welcome to your Dashboard</h2>
-      <p>Manage your profile and job applications.</p>
-    </div><div class="profile">
-  <h3>Your Profile</h3>
-  <p>Name: Rajesh Kumar</p>
-  <p>Skill: Electrician</p>
-  <p>Location: Delhi</p>
-  <button>Edit Profile</button>
+
+<h1>Worker-Employer Connect</h1>
+
+<div id="register-section">
+  <h2>Register</h2>
+  <input id="reg-username" placeholder="Username" />
+  <input id="reg-password" type="password" placeholder="Password" />
+  <select id="reg-role">
+    <option value="worker">Worker</option>
+    <option value="employer">Employer</option>
+  </select>
+  <button onclick="register()">Register</button>
 </div>
 
-<div class="job-posting">
-  <h3>Post a Job</h3>
-  <form>
-    <input type="text" placeholder="Job Title" required>
-    <input type="text" placeholder="Location" required>
-    <input type="text" placeholder="Skill Required" required>
-    <input type="text" placeholder="Salary (per month)" required>
-    <button type="submit">Post Job</button>
-  </form>
+<div id="login-section">
+  <h2>Login</h2>
+  <input id="login-username" placeholder="Username" />
+  <input id="login-password" type="password" placeholder="Password" />
+  <button onclick="login()">Login</button>
 </div>
 
-<div class="job-posting">
-  <h3>Search Jobs</h3>
-  <input type="text" placeholder="Enter skill or location">
-  <div class="job-listings">
-    <div class="job">
-      <strong>Electrician</strong><br>
-      <span>Location: Mumbai</span><br>
-      <button>Apply</button>
-    </div>
-    <div class="job">
-      <strong>Plumber</strong><br>
-      <span>Location: Delhi</span><br>
-      <button>Apply</button>
-    </div>
+<div id="user-section" class="hidden">
+  <h2>Welcome, <span id="user-name"></span> (<span id="user-role"></span>)</h2>
+  <button onclick="logout()">Logout</button>
+
+  <div id="employer-section" class="hidden">
+    <h3>Post a Job</h3>
+    <input id="job-title" placeholder="Job Title" />
+    <textarea id="job-desc" placeholder="Job Description"></textarea>
+    <button onclick="postJob()">Post Job</button>
+  </div>
+
+  <h3>Available Jobs</h3>
+  <div id="jobs-list"></div>
+
+  <div id="admin-section" class="hidden">
+    <h3>Admin Panel</h3>
+    <button onclick="loadAdminUsers()">View Users</button>
+    <button onclick="loadAdminJobs()">View Jobs</button>
+
+    <div id="admin-users-list"></div>
+    <div id="admin-jobs-list"></div>
   </div>
 </div>
 
-<div class="apply-form">
-  <h3>Apply for Job</h3>
-  <form>
-    <input type="text" placeholder="Your Name" required>
-    <input type="text" placeholder="Phone Number" required>
-    <input type="text" placeholder="Skill" required>
-    <button type="submit">Apply Now</button>
-  </form>
-</div>
+<script>
+  let currentUser = null;
 
-<div class="admin-section">
-  <h3>Admin Panel</h3>
-  <div class="admin-panel">
-    <div class="admin-box">
-      <strong>Verify Workers</strong><br>
-      <button>View Requests</button>
-    </div>
-    <div class="admin-box">
-      <strong>Manage Jobs</strong><br>
-      <button>View Jobs</button>
-    </div>
-  </div>
-</div>
+  function register() {
+    const username = document.getElementById('reg-username').value.trim();
+    const password = document.getElementById('reg-password').value.trim();
+    const role = document.getElementById('reg-role').value;
+    if (!username || !password) {
+      alert('Please enter username and password');
+      return;
+    }
+    fetch('http://localhost:3000/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password, role })
+    }).then(res => res.json())
+      .then(data => alert(data.message || data.error));
+  }
 
-  </section>  <footer id="contact">
-    <p>&copy; 2025 LabourLink. All rights reserved.</p>
-  </footer>
+  function login() {
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value.trim();
+    if (!username || !password) {
+      alert('Please enter username and password');
+      return;
+    }
+    fetch('http://localhost:3000/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data, 'data');
+        if (data.error) {
+          alert(data.error);
+        } else {
+          currentUser = { username: data.username, role: data.role };
+          document.getElementById('user-name').textContent = currentUser.username;
+          document.getElementById('user-role').textContent = currentUser.role;
+          document.getElementById('register-section').classList.add('hidden');
+          document.getElementById('login-section').classList.add('hidden');
+          document.getElementById('user-section').classList.remove('hidden');
+
+          if (currentUser.role === 'employer') {
+            document.getElementById('employer-section').classList.remove('hidden');
+          } else {
+            document.getElementById('employer-section').classList.add('hidden');
+          }
+
+          if (currentUser.role === 'admin') {
+            document.getElementById('admin-section').classList.remove('hidden');
+          } else {
+            document.getElementById('admin-section').classList.add('hidden');
+          }
+
+          loadJobs();
+        }
+      });
+  }
+
+  function logout() {
+    currentUser = null;
+    document.getElementById('register-section').classList.remove('hidden');
+    document.getElementById('login-section').classList.remove('hidden');
+    document.getElementById('user-section').classList.add('hidden');
+    document.getElementById('employer-section').classList.add('hidden');
+    document.getElementById('admin-section').classList.add('hidden');
+    clearAdminLists();
+  }
+
+  function postJob() {
+    const title = document.getElementById('job-title').value.trim();
+    const description = document.getElementById('job-desc').value.trim();
+    if (!title || !description) {
+      alert('Please enter job title and description');
+      return;
+    }
+    fetch('http://localhost:3000/api/jobs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: currentUser.username, title, description })
+    }).then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          alert('Job posted!');
+          document.getElementById('job-title').value = '';
+          document.getElementById('job-desc').value = '';
+          loadJobs();
+        }
+      });
+  }
+
+  function loadJobs() {
+    fetch('http://localhost:3000/api/jobs')
+      .then(res => res.json())
+      .then(jobs => {
+        const jobsList = document.getElementById('jobs-list');
+        jobsList.innerHTML = '';
+        if (jobs.length === 0) {
+          jobsList.textContent = 'No jobs available.';
+          return;
+        }
+        jobs?.forEach(job => {
+          const div = document.createElement('div');
+          div.className = 'job';
+          div.innerHTML = `<h4>${job.title}</h4><p>${job.description}</p><small>Posted by: ${job.employer}</small>`;
+          jobsList.appendChild(div);
+        });
+      });
+  }
+
+  // Admin functions
+
+  function loadAdminUsers() {
+    fetch('http://localhost:3000/api/admin/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: currentUser.username })
+    }).then(res => res.json())
+      .then(users => {
+        const usersList = document.getElementById('admin-users-list');
+        usersList.innerHTML = '<h4>Users</h4>';
+        if (users.length === 0) {
+          usersList.innerHTML += '<p>No users found.</p>';
+          return;
+        }
+        users.forEach(u => {
+          const div = document.createElement('div');
+          div.className = 'user-item';
+          div.textContent = `${u.username} (${u.role})`;
+          if (u.username !== 'admin') {
+            const delBtn = document.createElement('button');
+            delBtn.textContent = 'Delete';
+            delBtn.onclick = () => deleteUser(u.username);
+            div.appendChild(delBtn);
+          }
+          usersList.appendChild(div);
+        });
+      });
+  }
+
+  function loadAdminJobs() {
+    fetch('http://localhost:3000/api/admin/jobs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: currentUser.username })
+    }).then(res => res.json())
+      .then(jobs => {
+        const jobsList = document.getElementById('admin-jobs-list');
+        jobsList.innerHTML = '<h4>Jobs</h4>';
+        if (jobs.length === 0) {
+          jobsList.innerHTML += '<p>No jobs found.</p>';
+          return;
+        }
+        jobs.forEach(job => {
+          const div = document.createElement('div');
+          div.className = 'admin-job-item';
+          div.textContent =  `${job.id} ${job.title} by ${job.employer}`;
+          const delBtn = document.createElement('button');
+          delBtn.textContent = 'Delete';
+          delBtn.onclick = () => deleteJob(job.id);
+          div.appendChild(delBtn);
+          jobsList.appendChild(div);
+        });
+      });
+  }
+
+  function deleteUser(username) {
+    if (!confirm(`Delete user ${username} and all their jobs?`)) return;
+    fetch('http://localhost:3000/api/admin/delete-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: currentUser.username, targetUsername: username })
+    }).then(res => res.json())
+      .then(data => {
+        alert(data.message);
+        loadAdminUsers();
+        loadJobs();
+      });
+  }
+
+  function deleteJob(jobId) {
+    if (!confirm(`Delete job #${jobId}?`)) return;
+    fetch('http://localhost:3000/api/admin/delete-job', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: currentUser.username, jobId })
+    }).then(res => res.json())
+      .then(data => {
+        alert(data.message);
+        loadAdminJobs();
+        loadJobs();
+      });
+  }
+
+  function clearAdminLists() {
+    document.getElementById('admin-users-list').innerHTML = '';
+    document.getElementById('admin-jobs-list').innerHTML = '';
+  }
+</script>
+
 </body>
 </html>
