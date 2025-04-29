@@ -61,6 +61,8 @@
 
 <script>
   let currentUser = null;
+  // const basheUrl = 'http://localhost:3000';
+  const basheUrl = 'https://joblink-zh1e.onrender.com';
 
   function register() {
     const username = document.getElementById('reg-username').value.trim();
@@ -70,7 +72,7 @@
       alert('Please enter username and password');
       return;
     }
-    fetch('http://localhost:3000/api/register', {
+    fetch(`${basheUrl}/api/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password, role })
@@ -85,7 +87,7 @@
       alert('Please enter username and password');
       return;
     }
-    fetch('http://localhost:3000/api/login', {
+    fetch(`${basheUrl}/api/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
@@ -136,7 +138,7 @@
       alert('Please enter job title and description');
       return;
     }
-    fetch('http://localhost:3000/api/jobs', {
+    fetch(`${basheUrl}/api/jobs`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: currentUser.username, title, description })
@@ -154,7 +156,7 @@
   }
 
   function loadJobs() {
-    fetch('http://localhost:3000/api/jobs')
+    fetch(`${basheUrl}/api/jobs`)
       .then(res => res.json())
       .then(jobs => {
         const jobsList = document.getElementById('jobs-list');
@@ -175,7 +177,7 @@
   // Admin functions
 
   function loadAdminUsers() {
-    fetch('http://localhost:3000/api/admin/users', {
+    fetch(`${basheUrl}/api/admin/users`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: currentUser.username })
@@ -203,7 +205,7 @@
   }
 
   function loadAdminJobs() {
-    fetch('http://localhost:3000/api/admin/jobs', {
+    fetch(`${basheUrl}/api/admin/jobs`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: currentUser.username })
@@ -230,7 +232,7 @@
 
   function deleteUser(username) {
     if (!confirm(`Delete user ${username} and all their jobs?`)) return;
-    fetch('http://localhost:3000/api/admin/delete-user', {
+    fetch(`${basheUrl}/api/admin/delete-user`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: currentUser.username, targetUsername: username })
@@ -244,7 +246,7 @@
 
   function deleteJob(jobId) {
     if (!confirm(`Delete job #${jobId}?`)) return;
-    fetch('http://localhost:3000/api/admin/delete-job', {
+    fetch(`${basheUrl}/api/admin/delete-job`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: currentUser.username, jobId })
