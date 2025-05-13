@@ -124,7 +124,7 @@ function isAdmin(req, res, next) {
 
 // Get all users (admin only)
 app.post('/api/admin/users', isAdmin, (req, res) => {
-  db.all(`SELECT username, role FROM users`, [], (err, rows) => {
+  db.all(`SELECT username, role,contactnumber FROM users`, [], (err, rows) => {
     if (err) return res.status(500).json({ error: 'Database error' });
     res.json(rows);
   });

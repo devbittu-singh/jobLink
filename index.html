@@ -202,7 +202,7 @@
         users.forEach(u => {
           const div = document.createElement('div');
           div.className = 'user-item';
-          div.textContent = `${u.username} (${u.role})`;
+          div.textContent = `${u.username} (${u.contactnumber} || ${u.role})`;
           if (u.username !== 'admin') {
             const delBtn = document.createElement('button');
             delBtn.textContent = 'Delete';
