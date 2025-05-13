@@ -26,14 +26,16 @@ db.serialize(() => {
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE,
     password TEXT,
-    role TEXT
+    role TEXT,
+    contactnumber TEXT
   )`);
 
   db.run(`CREATE TABLE IF NOT EXISTS jobs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     description TEXT,
-    employer TEXT
+    employer TEXT,
+    location TEXT
   )`);
 
   // Insert admin user if not exists
@@ -53,12 +55,14 @@ app.get('/api/ping', (req, res) => {
 
 // Register user
 app.post('/api/register', (req, res) => {
-  const { username, password, role } = req.body;
-  if (!username || !password || !role) {
+  const { username, password, role, contactnumber } = req.body;
+  if (!username || !password || !role || !contactnumber) {
     return res.status(400).json({ error: 'Missing fields' });
   }
-  const stmt = db.prepare(`INSERT INTO users (username, password, role) VALUES (?, ?, ?)`);
-  stmt.run(username, password, role, function (err) {
+  console.log(contactnumber, role,'contactnumber, role');
+  const stmt = db.prepare(`INSERT INTO users (username, password, role, contactnumber ) VALUES (?, ?, ?, ?)`);
+  console.log(stmt, 'stmt');
+  stmt.run(username, password, role, contactnumber, function (err) {
     if (err) {
       return res.status(400).json({ error: 'Username taken' });
     }
@@ -77,29 +81,29 @@ app.post('/api/login', (req, res) => {
     if (!row) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    res.json({ message: 'Login successful', role: row.role, username: row.username });
+    res.json({ message: 'Login successful', role: row.role, username: row.username, contactnumber: row.contactnumber });
   });
 });
 
 // Post a job (employer only)
 app.post('/api/jobs', (req, res) => {
-  const { username, title, description } = req.body;
+  const { username, title, description,location } = req.body;
   db.get(`SELECT * FROM users WHERE username = ?`, [username], (err, user) => {
     if (err) return res.status(500).json({ error: 'Database error' });
     if (!user || user.role !== 'employer') {
       return res.status(403).json({ error: 'Only employers can post jobs' });
     }
-    const stmt = db.prepare(`INSERT INTO jobs (title, description, employer) VALUES (?, ?, ?)`);
-    stmt.run(title, description, username, function (err) {
+    const stmt = db.prepare(`INSERT INTO jobs (title, description, employer,location) VALUES (?, ?, ?, ?)`);
+    stmt.run(title, description, username,location, function (err) {
       if (err) return res.status(500).json({ error: 'Failed to post job' });
-      res.json({ message: 'Job posted', job: { id: this.lastID, title, description, employer: username } });
+      res.json({ message: 'Job posted', job: { id: this.lastID, title, description, employer: username, location } });
     });
     stmt.finalize();
   });
 });
 
 // Get all jobs
-app.get('/api/jobs', (req, res) => {
+app.get('/api/get_jobs', (req, res) => {
   db.all(`SELECT * FROM jobs`, [], (err, rows) => {
     if (err) return res.status(500).json({ error: 'Database error' });
     res.json(rows);

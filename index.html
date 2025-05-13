@@ -20,6 +20,7 @@
 <div id="register-section">
   <h2>Register</h2>
   <input id="reg-username" placeholder="Username" />
+  <input id="reg-contactnumber" type="number" placeholder="Contact Number" />
   <input id="reg-password" type="password" placeholder="Password" />
   <select id="reg-role">
     <option value="worker">Worker</option>
@@ -36,12 +37,13 @@
 </div>
 
 <div id="user-section" class="hidden">
-  <h2>Welcome, <span id="user-name"></span> (<span id="user-role"></span>)</h2>
+  <h2>Welcome, <span id="user-name"></span> <span id="user-contact"></span> (<span id="user-role"></span>)</h2>
   <button onclick="logout()">Logout</button>
 
   <div id="employer-section" class="hidden">
     <h3>Post a Job</h3>
     <input id="job-title" placeholder="Job Title" />
+    <input id="job-location" placeholder="Job Location" />
     <textarea id="job-desc" placeholder="Job Description"></textarea>
     <button onclick="postJob()">Post Job</button>
   </div>
@@ -67,15 +69,20 @@
   function register() {
     const username = document.getElementById('reg-username').value.trim();
     const password = document.getElementById('reg-password').value.trim();
+    const contactnumber = document.getElementById('reg-contactnumber').value;
     const role = document.getElementById('reg-role').value;
-    if (!username || !password) {
+    if (!username || !password || !contactnumber) {
       alert('Please enter username and password');
+      return;
+    }
+    if (contactnumber.length !== 10) {
+      alert('Please enter a valid contact number');
       return;
     }
     fetch(`${basheUrl}/api/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password, role })
+      body: JSON.stringify({ username, password, role , contactnumber })
     }).then(res => res.json())
       .then(data => alert(data.message || data.error));
   }
@@ -100,6 +107,7 @@
           currentUser = { username: data.username, role: data.role };
           document.getElementById('user-name').textContent = currentUser.username;
           document.getElementById('user-role').textContent = currentUser.role;
+          document.getElementById('user-contact').textContent = currentUser.contactnumber;
           document.getElementById('register-section').classList.add('hidden');
           document.getElementById('login-section').classList.add('hidden');
           document.getElementById('user-section').classList.remove('hidden');
@@ -133,15 +141,16 @@
 
   function postJob() {
     const title = document.getElementById('job-title').value.trim();
+    const location = document.getElementById('job-location').value.trim();
     const description = document.getElementById('job-desc').value.trim();
-    if (!title || !description) {
-      alert('Please enter job title and description');
+    if (!title || !description || !location) {
+      alert('Please enter job title , Job Location and description');
       return;
     }
     fetch(`${basheUrl}/api/jobs`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: currentUser.username, title, description })
+      body: JSON.stringify({ username: currentUser.username, title, description,location })
     }).then(res => res.json())
       .then(data => {
         if (data.error) {
@@ -149,6 +158,7 @@
         } else {
           alert('Job posted!');
           document.getElementById('job-title').value = '';
+          document.getElementById('job-location').value = '';
           document.getElementById('job-desc').value = '';
           loadJobs();
         }
@@ -156,7 +166,7 @@
   }
 
   function loadJobs() {
-    fetch(`${basheUrl}/api/jobs`)
+    fetch(`${basheUrl}/api/get_jobs`)
       .then(res => res.json())
       .then(jobs => {
         const jobsList = document.getElementById('jobs-list');
@@ -168,7 +178,7 @@
         jobs?.forEach(job => {
           const div = document.createElement('div');
           div.className = 'job';
-          div.innerHTML = `<h4>${job.title}</h4><p>${job.description}</p><small>Posted by: ${job.employer}</small>`;
+          div.innerHTML = `<h4>${job.title}</h4><b>${job.location}</b><p>${job.description}</p><small>Posted by: ${job.employer}</small>`;
           jobsList.appendChild(div);
         });
       });
@@ -220,7 +230,7 @@
         jobs.forEach(job => {
           const div = document.createElement('div');
           div.className = 'admin-job-item';
-          div.textContent =  `${job.id} ${job.title} by ${job.employer}`;
+          div.textContent =  `${job.id} <b>${job.location}</b> ${job.title} by ${job.employer}`;
           const delBtn = document.createElement('button');
           delBtn.textContent = 'Delete';
           delBtn.onclick = () => deleteJob(job.id);
