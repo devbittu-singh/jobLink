@@ -230,7 +230,7 @@
         jobs.forEach(job => {
           const div = document.createElement('div');
           div.className = 'admin-job-item';
-          div.textContent =  `${job.id} <b>${job.location}</b> ${job.title} by ${job.employer}`;
+          div.textContent =  `${job.id} ${job.title} ${job.location} by ${job.employer}`;
           const delBtn = document.createElement('button');
           delBtn.textContent = 'Delete';
           delBtn.onclick = () => deleteJob(job.id);
